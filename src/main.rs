@@ -6,7 +6,9 @@ async fn get_printer_fact() -> Result<String, reqwest::Error> {
 
 #[tokio::main]
 async fn main() {
-    get_printer_fact().await.into_iter().for_each(|f| {
-        println!("your printer fact is: {}", f);
-    });
+    let f = get_printer_fact().await;
+    match f {
+        Ok(f) => println!("Printer fact: {}", f),
+        Err(err) => println!("Argh: {}", err),
+    }
 }
